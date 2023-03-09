@@ -1,0 +1,25 @@
+{
+	"name": "peachy-stories",
+	"version": "0.0.0",
+	"scripts": {
+		"dev": "pnpm --stream --parallel -r --filter '@peachy-stories/core' --filter '@peachy-stories/app' dev",
+		"build": "pnpm --stream --parallel -r --filter '@peachy-stories/core' --filter '@peachy-stories/app' build",
+		"lint": "eslint . --ext .ts --ext .vue --fix"
+	},
+	"devDependencies": {
+		"@typescript-eslint/eslint-plugin": "^5.53.0",
+		"@typescript-eslint/parser": "^5.53.0",
+		"@vue/eslint-config-airbnb": "^7.0.0",
+		"@vue/eslint-config-typescript": "^11.0.2",
+		"eslint": "^8.34.0",
+		"eslint-config-prettier": "^8.6.0",
+		"eslint-import-resolver-typescript": "^3.5.3",
+		"eslint-plugin-import": "^2.27.5",
+		"eslint-plugin-prettier": "^4.2.1",
+		"eslint-plugin-vue": "^9.9.0",
+		"eslint-plugin-vuejs-accessibility": "^2.1.0",
+		"prettier": "^2.8.4",
+		"typescript": "^4.9.5",
+		"vue-eslint-parser": "^9.1.0"
+	}
+}

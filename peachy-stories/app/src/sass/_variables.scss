@@ -1,0 +1,118 @@
+$white: #ffffff;
+$black: #121212;
+
+$spacing-unit: 0.25rem;
+$border-radius-unit: 0.25rem;
+
+$breakpoints: (
+	xs: 320px,
+	sm: 551px,
+	md: 769px,
+	lg: 1025px,
+	xl: 1441px,
+);
+
+@mixin flex($center: false, $gap: spacing(1)) {
+	display: flex;
+	gap: $gap;
+
+	@if $center {
+		justify-content: center;
+		align-items: center;
+	}
+}
+
+@mixin box($width, $height: $width, $circular: false) {
+	width: $width;
+	height: $height;
+
+	@if $circular {
+		@include circle();
+	}
+}
+
+@mixin circle {
+	border-radius: 100%;
+}
+
+@function spacing($amount: 1) {
+	@return $amount * $spacing-unit;
+}
+
+@mixin border-radius($amount: 1) {
+	border-radius: $amount * $border-radius-unit;
+}
+
+@mixin hover {
+	@media not all and (pointer: coarse) {
+		&:hover {
+			@content;
+		}
+	}
+}
+
+@mixin breakpoint($name, $type: min) {
+	@if not map-has-key($breakpoints, $name) {
+		@warn "Warning: `#{$name}` is not a valid breakpoint name.";
+	} @else {
+		@media (#{$type}-width: map-get($breakpoints, $name)) {
+			@content;
+		}
+	}
+}
+
+@mixin abs-position($top: 0, $left: 0, $bottom: auto, $right: auto) {
+	position: absolute;
+	top: $top;
+	left: $left;
+	bottom: $bottom;
+	right: $right;
+}
+
+@mixin text-shorten {
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+@mixin pseudo(
+	$location: before,
+	$width: 100%,
+	$height: 100%,
+	$display: inline-block,
+	$pos: absolute,
+	$content: ''
+) {
+	position: relative;
+
+	&::#{$location} {
+		content: $content;
+		display: $display;
+		position: $pos;
+		@include box($width, $height);
+
+		@content;
+	}
+}
+
+@mixin placeholder {
+	&.placeholder {
+		@content;
+	}
+
+	&:-moz-placeholder {
+		@content;
+	}
+
+	&::-moz-placeholder {
+		@content;
+	}
+
+	&:-ms-input-placeholder {
+		@content;
+	}
+
+	&::-webkit-input-placeholder {
+		@content;
+	}
+}

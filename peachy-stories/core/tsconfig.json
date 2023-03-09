@@ -1,0 +1,18 @@
+{
+	"include": ["src", "env.d.ts"],
+	"compilerOptions": {
+		"outDir": "dist",
+
+		"target": "es2016",
+		"module": "node16",
+		"moduleResolution": "node16",
+		"lib": ["ESNext", "DOM"],
+
+		"resolveJsonModule": true,
+		"declaration": true,
+		"declarationMap": true,
+		"esModuleInterop": true,
+		"forceConsistentCasingInFileNames": true,
+		"skipLibCheck": true
+	}
+}
