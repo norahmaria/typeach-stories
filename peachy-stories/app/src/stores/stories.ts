@@ -11,45 +11,46 @@ export const useStories = defineStore('stories', () => {
 
 	const stories = ref<Story[]>([]);
 
+	const update = (file: StoryFile) => {
+		const existingIndex = stories.value.findIndex(({ id }) => id === file.id);
+
+		const props = run(file);
+
+		const markdown = new MarkdownIt();
+
+		if (!props) {
+			console.error(`Could not load props for: ${file.file}`);
+			return;
+		}
+
+		const _update: Story = {
+			...file,
+			pendingUpdates: false,
+			docsHtml: file.component.__docs && `${markdown.render(file.component.__docs)}`,
+			props,
+		};
+
+		if (existingIndex !== -1) {
+			stories.value[existingIndex] = _update;
+		} else {
+			stories.value.push(_update);
+		}
+
+		return update;
+	};
+
+	const set = (_update: StoryFile[]) => {
+		files.value = _update;
+
+		files.value.map(file => update(file));
+	};
+
 	return {
 		files,
 		stories,
 
-		set(update: StoryFile[]) {
-			files.value = update;
+		set,
 
-			files.value.map(async file => {
-				await this.update(file);
-			});
-		},
-
-		async update(file: StoryFile) {
-			const existingIndex = stories.value.findIndex(({ id }) => id === file.id);
-
-			/** @todo fix run result not being up to date */
-			const props = await run(file);
-
-			const markdown = new MarkdownIt();
-
-			if (!props) {
-				console.error(`Could not load props for: ${file.file}`);
-				return;
-			}
-
-			const update: Story = {
-				...file,
-				pendingUpdates: false,
-				docsHtml: file.component.__docs && `${markdown.render(file.component.__docs)}`,
-				props,
-			};
-
-			if (existingIndex !== -1) {
-				stories.value[existingIndex] = update;
-			} else {
-				stories.value.push(update);
-			}
-
-			return update;
-		},
+		update,
 	};
 });

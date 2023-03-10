@@ -1,14 +1,10 @@
-import { createApp, h, type DefineComponent } from 'vue';
+import { createApp, h } from 'vue';
 
 import Story from './components/public/Story.vue';
 import Variant from './components/public/Variant.vue';
 import type { StoryFile, StoryProps, VariantProps } from './types';
 
-export const run = async (file: StoryFile): Promise<StoryProps | undefined> => {
-	const { default: Comp } = (await import(file.file)) as {
-		default: DefineComponent;
-	};
-
+export const run = (file: StoryFile): StoryProps | undefined => {
 	let result: StoryProps | undefined;
 
 	const app = createApp({
@@ -23,7 +19,7 @@ export const run = async (file: StoryFile): Promise<StoryProps | undefined> => {
 		},
 
 		render() {
-			return h(Comp);
+			return h({ ...file.component });
 		},
 	});
 

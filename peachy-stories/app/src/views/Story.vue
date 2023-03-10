@@ -11,7 +11,7 @@
 </template>
 
 <script setup lang="ts">
-	import { computed, ref } from 'vue';
+	import { computed, ref, provide } from 'vue';
 
 	import { useRoute } from 'vue-router';
 
@@ -22,6 +22,9 @@
 	const route = useRoute();
 
 	const component = ref();
+
+	provide('addStory', undefined);
+	provide('addVariant', undefined);
 
 	const story = computed(() => stories.stories.find(it => it.id === route.params.id));
 </script>

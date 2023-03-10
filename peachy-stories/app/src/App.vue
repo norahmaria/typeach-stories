@@ -7,7 +7,6 @@
 </template>
 
 <script setup lang="ts">
-	import { provide, nextTick } from 'vue';
 	import { RouterView } from 'vue-router';
 
 	import { rawFiles, onUpdate } from '$peachy-stories';
@@ -19,12 +18,7 @@
 
 	stories.set(rawFiles);
 
-	provide('addStory', undefined);
-	provide('addVariant', undefined);
-
 	onUpdate(async updatedStories => {
-		await nextTick();
-
 		await Promise.all(updatedStories.map(story => stories.update(story)));
 
 		if (import.meta.hot) {
