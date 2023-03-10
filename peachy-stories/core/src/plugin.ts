@@ -1,6 +1,6 @@
 import { readFile } from 'node:fs/promises';
 import { existsSync } from 'node:fs';
-import { join, relative } from 'node:path';
+import { relative } from 'node:path';
 
 import { type Plugin } from 'vite';
 
