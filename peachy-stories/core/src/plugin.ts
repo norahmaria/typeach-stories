@@ -1,5 +1,6 @@
 import { readFile } from 'node:fs/promises';
-import { relative } from 'node:path';
+import { existsSync } from 'node:fs';
+import { join, relative } from 'node:path';
 
 import { type Plugin } from 'vite';
 
@@ -115,7 +116,13 @@ export const createVitePlugin = (stories: Stories, appPaths: AppPaths): Plugin =
 			/* eslint-disable-next-line @typescript-eslint/no-misused-promises */
 			server.middlewares.use(async (req, res, next) => {
 				if (req.url?.endsWith('.html')) {
-					const html = await readFile(appPaths.html, 'utf-8');
+					let html: string;
+
+					if (!existsSync(appPaths.html)) {
+						html = '<div>Loading</div>';
+					} else {
+						html = await readFile(appPaths.html, 'utf-8');
+					}
 
 					const transformedHtml = transformIndexHtml(html, appPaths);
 

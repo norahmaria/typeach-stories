@@ -13,4 +13,4 @@ pnpm build
 cd example && pnpm peachy
 ```
 
-_ps: still have some issues with allowing the example to run dynamically as the packages are changed, so sometimes you might have to rerun the example after changes. if that still doesn't work - manually run the build command._
+_ps: still have some issues with allowing the example to run dynamically as the packages are changed, so sometimes you might have to refresh the app on changes._
