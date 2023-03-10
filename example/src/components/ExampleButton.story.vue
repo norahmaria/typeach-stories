@@ -1,6 +1,6 @@
 <template>
 	<Story title="Button">
-		<ExampleButton color="danger"> qqqq </ExampleButton>
+		<ExampleButton color="danger"> Hello World </ExampleButton>
 	</Story>
 </template>
 

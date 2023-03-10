@@ -1,11 +1,11 @@
 <template>
 	<Story title="Button Variants">
 		<Variant title="primary">
-			<ExampleButton color="primary"> Hello Again </ExampleButton>
+			<ExampleButton color="primary"> Hello World </ExampleButton>
 		</Variant>
 
 		<Variant title="danger">
-			<ExampleButton color="danger"> Hello Again </ExampleButton>
+			<ExampleButton color="danger"> Hello Villain </ExampleButton>
 		</Variant>
 	</Story>
 </template>
