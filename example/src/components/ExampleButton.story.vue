@@ -1,5 +1,5 @@
 <template>
-	<Story title="Button losls">
+	<Story title="Button">
 		<ExampleButton color="danger"> qqqq </ExampleButton>
 	</Story>
 </template>
