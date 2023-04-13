@@ -2,23 +2,21 @@
 	<button
 		class="btn"
 		type="button"
-		:disabled="disabled"
 		:class="{
-			[`btn-color-${color}`]: color,
+			[`btn-${color}`]: color,
 		}">
+		<!-- @slot Icon -->
 		<slot />
 	</button>
 </template>
 
 <script lang="ts" setup>
 	export interface ExampleButtonProps {
-		color?: 'primary' | 'danger' | 'neutral';
-		disabled?: boolean;
+		color?: 'neutral' | 'primary' | 'danger';
 	}
 
 	withDefaults(defineProps<ExampleButtonProps>(), {
 		color: 'neutral',
-		disabled: false,
 	});
 </script>
 
@@ -37,22 +35,18 @@
 		}
 	}
 
-	.btn[disabled] {
-		opacity: 0.35;
-	}
-
-	.btn-color-neutral {
+	.btn-neutral {
 		background: #e4e4e4;
 		color: black;
 	}
 
-	.btn-color-danger {
-		background: #ff9494;
-		color: #710e0e;
+	.btn-primary {
+		background: #cb97ff;
+		color: #440c7c;
 	}
 
-	.btn-color-primary {
-		background: #c48aff;
-		color: #4e0f8d;
+	.btn-danger {
+		background: #ff9494;
+		color: #710e0e;
 	}
 </style>

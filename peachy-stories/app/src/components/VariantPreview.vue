@@ -36,8 +36,7 @@
 		flex-direction: column;
 		gap: spacing(3);
 
-		@include border-radius(1);
-		// background-color: red;
+		cursor: pointer;
 
 		&__title {
 			font-size: 1rem;

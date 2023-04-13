@@ -18,7 +18,7 @@ export const getEntryHtml = async (appPaths: AppPaths) => {
 
 	const html = existsSync(appPaths.html)
 		? await readFile(appPaths.html, 'utf-8')
-		: await readFile(require.resolve('../fallback.html'), 'utf-8');
+		: await readFile(require.resolve('../../../fallback.html'), 'utf-8');
 
 	return transformIndexHtml(html, appPaths);
 };
