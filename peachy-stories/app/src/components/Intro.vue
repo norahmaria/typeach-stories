@@ -1,9 +1,7 @@
 <template>
-	<div>Home page</div>
+	<div>Introduction page</div>
 </template>
 
-<script lang="ts" setup>
-	const props = defineProps({});
-</script>
+<script lang="ts" setup></script>
 
 <style lang="scss"></style>

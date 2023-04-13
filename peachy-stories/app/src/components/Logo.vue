@@ -18,6 +18,7 @@
 		display: flex;
 		align-items: center;
 		gap: spacing();
+
 		color: $blueish-gray-800;
 		font-size: 1rem;
 

@@ -70,22 +70,26 @@
 
 	.story {
 		width: 100%;
+		height: 100%;
 
 		&__playground {
-			width: 100%;
 			display: grid;
 			place-content: center;
+
 			height: minmax(max-content, 40vh);
-			padding: spacing(26) spacing(8);
+			width: 100%;
+
+			padding: spacing(36) spacing(8) spacing(26) spacing(8);
 			border-bottom: 1px solid $blueish-gray-200;
 		}
 
 		&__variants {
+			position: relative;
+			overflow-x: auto;
+
 			display: flex;
 			gap: spacing(4);
 			padding: spacing(8) spacing(8) spacing(4) spacing(8);
-			position: relative;
-			overflow-x: auto;
 		}
 
 		&__docs {

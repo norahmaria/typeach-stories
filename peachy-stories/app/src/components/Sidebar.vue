@@ -24,17 +24,18 @@
 
 <style lang="scss">
 	.sidebar {
-		padding: spacing(4);
-		width: 14rem;
-
 		display: flex;
 		flex-direction: column;
 		gap: spacing(6);
+		width: 14rem;
+
+		padding: spacing(4);
 
 		&__nav {
 			display: flex;
 			flex-direction: column;
 			gap: spacing(3);
+
 			font-size: 0.85rem;
 
 			.router-link-active {

@@ -14,9 +14,13 @@
 
 <style lang="scss">
 	.toolbar {
-		padding: spacing(4);
-		width: 100%;
+		z-index: 4;
 		position: absolute;
+		width: 100%;
+
+		padding: spacing(4);
+		background-color: $white;
+		border-bottom: 1px solid $blueish-gray-200;
 
 		h2 {
 			font-size: 1.25rem;
