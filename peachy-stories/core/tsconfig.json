@@ -1,6 +1,8 @@
 {
 	"include": ["src", "env.d.ts"],
 	"compilerOptions": {
+		"strict": true,
+		"noUncheckedIndexedAccess": true,
 		"outDir": "dist",
 
 		"target": "es2016",

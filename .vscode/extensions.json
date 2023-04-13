@@ -1,3 +1,11 @@
 {
-	"recommendations": ["Vue.volar", "Vue.vscode-typescript-vue-plugin"]
+	"recommendations": [
+		"vue.volar",
+		"redhat.vscode-yaml",
+		"formulahendry.auto-rename-tag",
+		"dbaeumer.vscode-eslint",
+		"esbenp.prettier-vscode",
+		"streetsidesoftware.code-spell-checker",
+		"bierner.jsdoc-markdown-highlighting"
+	]
 }

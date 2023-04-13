@@ -1,7 +1,5 @@
 <template>
-	<RouterLink to="/">
-		<div :class="$class()"><Grid /> {{ title }}</div>
-	</RouterLink>
+	<RouterLink to="/" :class="$class()"> <Grid /> {{ title }} </RouterLink>
 </template>
 
 <script lang="ts" setup>
@@ -21,6 +19,7 @@
 		align-items: center;
 		gap: spacing();
 		color: $blueish-gray-800;
+		font-size: 1rem;
 
 		svg path {
 			stroke: $blueish-gray-800;

@@ -3,14 +3,17 @@
 </template>
 
 <script lang="ts" setup>
-	import { inject } from 'vue';
-	import type { StoryProps } from '../../types';
+	import { inject, useSlots } from 'vue';
+	import type { StoryProps, AddStoryInput } from '../../types';
 
 	const props = defineProps<StoryProps>();
 
-	const addStory = inject<(story: StoryProps) => void | undefined>('addStory');
+	const addStory = inject<(story: AddStoryInput) => void | undefined>('addStory');
+
+	const slots = useSlots();
 
 	addStory?.({
-		title: props.title,
+		slots: slots.default?.(),
+		props,
 	});
 </script>

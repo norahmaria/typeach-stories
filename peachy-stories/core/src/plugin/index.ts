@@ -1,12 +1,12 @@
-import { readFile } from 'node:fs/promises';
-import { existsSync } from 'node:fs';
 import { relative } from 'node:path';
 
 import { type Plugin } from 'vite';
 
-import type { Stories } from './stories.js';
-import { type AppPaths, transformIndexHtml } from './utils/index.js';
-import type { Story } from './types/index.js';
+import type { Stories } from '../stories.js';
+import type { Story } from '../types/index.js';
+
+import { type AppPaths } from '../utils/index.js';
+import { getEntryHtml } from './lib/index.js';
 
 export const createVitePlugin = (stories: Stories, appPaths: AppPaths): Plugin => ({
 	name: 'peachy-stories',
@@ -89,7 +89,13 @@ export const createVitePlugin = (stories: Stories, appPaths: AppPaths): Plugin =
 		}
 	},
 
-	transform(code, id) {
+	/* eslint-disable */
+	async transform(code, id) {
+		if (id.includes('?vue&type=component-file')) {
+			/** @TODO Add types documentation */
+			return 'export default Comp => {}';
+		}
+
 		if (id.includes('?vue&type=docs')) {
 			return `export default Comp => { Comp.__docs = ${JSON.stringify(code)}; }`;
 		}
@@ -116,19 +122,10 @@ export const createVitePlugin = (stories: Stories, appPaths: AppPaths): Plugin =
 			/* eslint-disable-next-line @typescript-eslint/no-misused-promises */
 			server.middlewares.use(async (req, res, next) => {
 				if (req.url?.endsWith('.html')) {
-					let html: string;
-
-					if (!existsSync(appPaths.html)) {
-						html = '<div>Loading</div>';
-					} else {
-						html = await readFile(appPaths.html, 'utf-8');
-					}
-
-					const transformedHtml = transformIndexHtml(html, appPaths);
+					const html = await getEntryHtml(appPaths);
 
 					res.setHeader('content-type', 'text/html; charset=UTF-8');
-
-					res.end(await server.transformIndexHtml(req.url, transformedHtml));
+					res.end(await server.transformIndexHtml(req.url, html));
 
 					return;
 				}

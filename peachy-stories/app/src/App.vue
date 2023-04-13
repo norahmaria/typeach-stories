@@ -10,28 +10,33 @@
 	import { RouterView } from 'vue-router';
 
 	import { rawFiles, onUpdate } from '$peachy-stories';
-	import { useStories } from './stores/stories';
+	import { useFiles } from './stores/files';
 
-	import NavigationTree from './components/NavigationTree.vue';
+	import NavigationTree from './components/Sidebar.vue';
 
-	const stories = useStories();
+	const files = useFiles();
 
-	stories.set(rawFiles);
+	files.set(rawFiles);
 
-	onUpdate(async updatedStories => {
-		await Promise.all(updatedStories.map(story => stories.update(story)));
+	onUpdate(updatedFiles => {
+		updatedFiles.map(file => files.addOrUpdate(file));
 
 		if (import.meta.hot) {
-			import.meta.hot.send('$peachy-stories/updates-resolved', updatedStories);
+			import.meta.hot.send('$peachy-stories/updates-resolved', updatedFiles);
 		}
 	});
 </script>
 
 <style lang="scss">
-	#app {
-		display: grid;
-		grid-template-columns: auto 1fr;
-		height: calc(100vh - 2rem);
-		margin: 1rem;
+	main {
+		background-color: $white;
+		overflow-y: scroll;
+
+		box-shadow: 0px 20px 25px -5px rgba(16, 24, 40, 0.1),
+			0px 8px 10px -6px rgba(16, 24, 40, 0.1);
+
+		@include border-radius(2);
+		border-top-right-radius: 0;
+		border-bottom-right-radius: 0;
 	}
 </style>

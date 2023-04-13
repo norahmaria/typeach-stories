@@ -13,4 +13,4 @@ pnpm build
 cd example && pnpm peachy
 ```
 
-_ps: still have some issues with allowing the example to run dynamically as the packages are changed, so sometimes you might have to refresh the app on changes._
+_ps: when making changes to the peachy app, you might have to wait a bit before it'll load in dev mode, the "not found" html will automatically keep refreshing for you until it can find the app again._

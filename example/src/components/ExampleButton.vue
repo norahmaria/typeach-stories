@@ -52,7 +52,7 @@
 	}
 
 	.btn-color-primary {
-		background: #c994ff;
+		background: #c48aff;
 		color: #4e0f8d;
 	}
 </style>

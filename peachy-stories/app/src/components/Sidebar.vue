@@ -23,19 +23,23 @@
 </script>
 
 <style lang="scss">
-	.navigation-tree {
+	.sidebar {
 		padding: spacing(4);
-
 		width: 14rem;
 
 		display: flex;
 		flex-direction: column;
-		gap: 1rem;
+		gap: spacing(6);
 
 		&__nav {
 			display: flex;
 			flex-direction: column;
-			gap: 0.5rem;
+			gap: spacing(3);
+			font-size: 0.85rem;
+
+			.router-link-active {
+				font-weight: 600;
+			}
 		}
 	}
 </style>

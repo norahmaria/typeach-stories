@@ -47,26 +47,15 @@ export class Stories {
 			return existing;
 		}
 
-		this.stories.push({
+		const update: Story = {
 			id: kebabCase(file.replace('.story.vue', '').replace('/', '--')),
 			pendingUpdates: false,
 			file,
-		});
-
-		return this.find(file);
-	}
-
-	completeUpdate(file: string) {
-		const existing = this.stories.findIndex(story => story.file === file);
-
-		if (existing === -1) {
-			return console.error('No story for:', file);
-		}
-
-		this.stories[existing] = {
-			...this.stories[existing],
-			pendingUpdates: false,
 		};
+
+		this.stories.push(update);
+
+		return update;
 	}
 
 	update(file: string): Story {
@@ -76,13 +65,34 @@ export class Stories {
 			return this.add(file);
 		}
 
-		this.stories[existing] = {
+		const update: Story = {
 			id: kebabCase(file.replace('.story.vue', '').replace('/', '--')),
 			pendingUpdates: true,
 			file,
 		};
 
-		return this.find(file);
+		this.stories[existing] = update;
+
+		return update;
+	}
+
+	completeUpdate(file: string) {
+		const existing = this.stories.findIndex(story => story.file === file);
+
+		if (existing === -1) {
+			return console.error('No story for:', file);
+		}
+
+		const story = this.stories[existing];
+
+		if (!story) {
+			return console.error('No story for:', file);
+		}
+
+		this.stories[existing] = {
+			...story,
+			pendingUpdates: false,
+		};
 	}
 
 	find(file: string) {

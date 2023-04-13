@@ -25,9 +25,6 @@ body {
 	font-size: 1rem;
 	line-height: 1;
 
-	background-color: $blueish-gray-50;
-	color: $black;
-
 	label,
 	button {
 		cursor: pointer;
@@ -73,4 +70,20 @@ ol {
 		transition-duration: 0.01ms !important;
 		scroll-behavior: auto !important;
 	}
+}
+
+/* ━━━ Base ━━━ */
+body {
+	background-color: $blueish-gray-25;
+	color: $blueish-gray-900;
+}
+
+#app {
+	display: grid;
+	grid-template-columns: auto 1fr;
+	height: 100vh;
+}
+
+a {
+	color: $blueish-gray-900;
 }

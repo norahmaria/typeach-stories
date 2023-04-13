@@ -1,6 +1,8 @@
 {
-  "material-icon-theme.folders.associations": {
-    "peachy-stories": "hook",
-    "app": "layout"
-  }
+	"cSpell.words": ["callees", "unplugin", "middlewares"],
+	"material-icon-theme.folders.associations": {
+		"peachy-stories": "shared",
+		".peachy": "shared",
+		"app": "layout"
+	}
 }

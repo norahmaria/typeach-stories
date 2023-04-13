@@ -36,6 +36,7 @@ rules:
   indent:
     - error
     - tab
+    - SwitchCase: 1
 
   linebreak-style:
     - error
@@ -51,7 +52,7 @@ rules:
 
   complexity:
     - error
-    - 10
+    - 8
 
   'class-methods-use-this': error
   'default-case-last': error
@@ -60,9 +61,23 @@ rules:
   'no-plusplus': off
   'no-multiple-empty-lines': error
   'no-underscore-dangle': off
-  'import/no-extraneous-dependencies': off
+  'no-shadow': off
 
+  'no-else-return':
+    - warn
+    - allowElseIf: true
+
+  'no-console':
+    - warn
+    - allow:
+        - error
+        - assert
+        - warn
+
+  'no-unused-vars': off
+  'import/no-extraneous-dependencies': off
   'import/prefer-default-export': off
+  'array-callback-return': off
 
   'import/no-unresolved':
     - error
@@ -84,16 +99,14 @@ rules:
   '@typescript-eslint/restrict-template-expressions': off
   '@typescript-eslint/no-unsafe-assignment': off
 
+  '@typescript-eslint/no-unused-vars':
+    - warn
+    - argsIgnorePattern: '^_'
+      varsIgnorePattern: '^_'
+
   'vue/no-mutating-props': 'warn'
   'vue/no-setup-props-destructure': 'warn'
   'vue/multi-word-component-names': 'warn'
-
-  'no-console':
-    - warn
-    - allow:
-        - error
-        - assert
-        - warn
 
   'prefer-destructuring':
     - error

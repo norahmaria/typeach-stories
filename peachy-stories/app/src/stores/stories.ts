@@ -1,56 +1,79 @@
-import { ref } from 'vue';
+import { ref, watch } from 'vue';
 import { defineStore } from 'pinia';
 
 import MarkdownIt from 'markdown-it';
 
-import type { Story, StoryFile } from '../types';
-import { run } from '../run';
+import type { AddStoryInput, AddVariantInput, Story, StoryFile } from '../types';
 
 export const useStories = defineStore('stories', () => {
-	const files = ref<StoryFile[]>([]);
-
 	const stories = ref<Story[]>([]);
 
-	const update = (file: StoryFile) => {
-		const existingIndex = stories.value.findIndex(({ id }) => id === file.id);
+	const markdownIt = new MarkdownIt();
 
-		const props = run(file);
-
-		const markdown = new MarkdownIt();
-
-		if (!props) {
-			console.error(`Could not load props for: ${file.file}`);
-			return;
+	watch(
+		stories,
+		update => {
+			console.log('STORIES', update);
+		},
+		{
+			immediate: true,
 		}
-
-		const _update: Story = {
-			...file,
-			pendingUpdates: false,
-			docsHtml: file.component.__docs && `${markdown.render(file.component.__docs)}`,
-			props,
-		};
-
-		if (existingIndex !== -1) {
-			stories.value[existingIndex] = _update;
-		} else {
-			stories.value.push(_update);
-		}
-
-		return update;
-	};
-
-	const set = (_update: StoryFile[]) => {
-		files.value = _update;
-
-		files.value.map(file => update(file));
-	};
+	);
 
 	return {
-		files,
 		stories,
 
-		set,
+		addStory(story: AddStoryInput, file: StoryFile) {
+			const existingIndex = stories.value.findIndex(({ id }) => id === file.id);
 
-		update,
+			const docsHtml = file.component.__docs
+				? markdownIt.render(file.component.__docs)
+				: undefined;
+
+			const update: Story = {
+				...file,
+				props: story.props,
+				variants: [],
+				docsHtml,
+			};
+
+			if (existingIndex !== -1) {
+				stories.value[existingIndex] = update;
+			} else {
+				stories.value.push(update);
+			}
+		},
+
+		addVariant(variant: AddVariantInput, file: StoryFile) {
+			const story = stories.value.find(({ id }) => id === file.id);
+
+			if (!story) {
+				return console.error(`No story found for id: ${file.id}.`);
+			}
+
+			const generateId = () => `${file.id}-${story.variants.length}`;
+
+			const existing = story.variants.find(({ id }) => id === generateId());
+
+			if (!variant.slots) {
+				return console.error(
+					`Variation ${variant.props.title} of ${story.props.title} not found`
+				);
+			}
+
+			if (existing) {
+				Object.assign(existing, {
+					...existing,
+					props: variant.props,
+					component: variant.slots[0],
+				});
+			} else {
+				story.variants.push({
+					props: variant.props,
+					id: `${file.id}-${story.variants.length}`,
+					component: variant.slots[0],
+				});
+			}
+		},
 	};
 });

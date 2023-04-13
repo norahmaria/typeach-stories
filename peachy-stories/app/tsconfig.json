@@ -3,6 +3,7 @@
 	"include": ["env.d.ts", "env.peachy.d.ts", "class.d.ts", "src/**/*", "src/**/*.vue"],
 
 	"compilerOptions": {
+		"ignoreDeprecations": "5.0",
 		"baseUrl": ".",
 		"types": ["unplugin-vue-macros/macros-global"],
 		"paths": {

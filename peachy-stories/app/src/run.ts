@@ -2,19 +2,22 @@ import { createApp, h } from 'vue';
 
 import Story from './components/public/Story.vue';
 import Variant from './components/public/Variant.vue';
-import type { StoryFile, StoryProps, VariantProps } from './types';
 
-export const run = (file: StoryFile): StoryProps | undefined => {
-	let result: StoryProps | undefined;
+import type { AddStoryInput, AddVariantInput, StoryFile } from './types';
+
+import { useStories } from './stores/stories';
+
+export const run = (file: StoryFile) => {
+	const stories = useStories();
 
 	const app = createApp({
 		provide: {
-			addStory(props: StoryProps) {
-				result = props;
+			addStory(context: AddStoryInput) {
+				stories.addStory(context, file);
 			},
 
-			addVariant(variantProps: VariantProps, data: any) {
-				/** @todo */
+			addVariant(context: AddVariantInput) {
+				stories.addVariant(context, file);
 			},
 		},
 
@@ -33,6 +36,4 @@ export const run = (file: StoryFile): StoryProps | undefined => {
 	app.unmount();
 
 	el.remove();
-
-	return result;
 };
