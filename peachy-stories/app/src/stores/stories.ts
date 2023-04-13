@@ -1,4 +1,4 @@
-import { ref, watch } from 'vue';
+import { ref } from 'vue';
 import { defineStore } from 'pinia';
 
 import MarkdownIt from 'markdown-it';
@@ -9,16 +9,6 @@ export const useStories = defineStore('stories', () => {
 	const stories = ref<Story[]>([]);
 
 	const markdownIt = new MarkdownIt();
-
-	watch(
-		stories,
-		update => {
-			console.log('STORIES', update);
-		},
-		{
-			immediate: true,
-		}
-	);
 
 	return {
 		stories,
