@@ -78,12 +78,68 @@ body {
 	color: $blueish-gray-900;
 }
 
-#app {
-	display: grid;
-	grid-template-columns: auto 1fr;
-	height: 100vh;
-}
-
 a {
 	color: $blueish-gray-900;
+}
+
+/* ━━━ Stories ━━━ */
+.story__docs {
+	p + p {
+		margin-top: spacing(4);
+	}
+
+	h1,
+	h2,
+	h3,
+	h4,
+	h5,
+	h6 {
+		font-weight: 600;
+		line-height: 1.25;
+
+		&:not(:first-child) {
+			margin-top: spacing(4);
+			margin-bottom: spacing(2);
+		}
+	}
+
+	h1 {
+		font-weight: 700;
+	}
+
+	h1 {
+		font-size: 2rem;
+	}
+
+	h2 {
+		font-size: 1.75rem;
+	}
+
+	h3 {
+		font-size: 1.35rem;
+		text-transform: uppercase;
+	}
+
+	h4 {
+		font-size: 1.2rem;
+	}
+
+	h5 {
+		font-size: 1rem;
+	}
+
+	h6 {
+		font-size: 0.85rem;
+	}
+
+	ul,
+	ol {
+		list-style: disc;
+		margin-left: 2rem;
+		padding: spacing(6) 0;
+
+		li + li {
+			margin-top: spacing(2);
+		}
+	}
 }

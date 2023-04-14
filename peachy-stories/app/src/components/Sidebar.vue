@@ -26,15 +26,18 @@
 	.sidebar {
 		display: flex;
 		flex-direction: column;
-		gap: spacing(6);
-		width: 14rem;
+		gap: spacing(4);
 
+		width: minmax(12rem, 18rem);
 		padding: spacing(4);
+
+		background: rgb(251, 251, 250);
+		border-right: 1px solid #f2f2f1;
 
 		&__nav {
 			display: flex;
 			flex-direction: column;
-			gap: spacing(3);
+			gap: spacing(2);
 
 			font-size: 0.85rem;
 

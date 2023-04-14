@@ -1,7 +1,5 @@
 <template>
-	<div v-if="!story" :class="$class('empty')">Could not find story.</div>
-
-	<div v-else :class="$class()">
+	<div :class="$class()" v-if="story">
 		<Toolbar :title="story.props.title" />
 
 		<div :class="$class('playground')">
@@ -21,6 +19,8 @@
 
 		<div :class="$class('docs')" v-if="story.docsHtml" v-html="story.docsHtml" />
 	</div>
+
+	<div v-else class="empty-story">Could not find story.</div>
 </template>
 
 <script setup lang="ts">
@@ -61,7 +61,7 @@
 </script>
 
 <style lang="scss">
-	.story__empty {
+	.empty-story {
 		display: grid;
 		place-content: center;
 		height: 100%;
@@ -69,7 +69,8 @@
 	}
 
 	.story {
-		width: 100%;
+		overflow-y: scroll;
+		background-color: $white;
 		height: 100%;
 
 		&__playground {

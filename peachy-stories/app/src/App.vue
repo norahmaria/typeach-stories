@@ -1,8 +1,10 @@
 <template>
-	<NavigationTree />
-
 	<main>
+		<Sidebar />
+
 		<RouterView />
+
+		<Plugins />
 	</main>
 </template>
 
@@ -12,7 +14,8 @@
 	import { rawFiles, onUpdate } from '$peachy-stories';
 	import { useFiles } from './stores/files';
 
-	import NavigationTree from './components/Sidebar.vue';
+	import Sidebar from './components/Sidebar.vue';
+	import Plugins from './components/Plugins.vue';
 
 	const files = useFiles();
 
@@ -29,14 +32,15 @@
 
 <style lang="scss">
 	main {
-		background-color: $white;
-		overflow-y: scroll;
+		display: flex;
+		overflow: hidden;
 
-		box-shadow: 0px 20px 25px -5px rgba(16, 24, 40, 0.1),
-			0px 8px 10px -6px rgba(16, 24, 40, 0.1);
+		height: 100vh;
 
-		@include border-radius(2);
-		border-top-right-radius: 0;
-		border-bottom-right-radius: 0;
+		.sidebar,
+		.plugins {
+			flex-shrink: 0;
+			height: 100%;
+		}
 	}
 </style>
